@@ -4,7 +4,7 @@ import React from "react";
 import { Menu } from "lucide-react";
 import { AdminLogo } from "./Logo";
 import SideBar from "./SideBar";
-import { useSidebar } from "../../context/sidebarContext";
+import { useSidebar } from "../contexts/sidebarContext";
 
 const TopBar = () => {
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();

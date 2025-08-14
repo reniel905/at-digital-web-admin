@@ -1,7 +1,7 @@
 import React, { JSX, useEffect, useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { useSidebar } from "../../context/sidebarContext";
+import { useSidebar } from "../contexts/sidebarContext";
 
 const defaultStyle =
   "flex flex-row justify-center items-center text-white hover:bg-neutral-800 hover:cursor-pointer select-none rounded-md mb-2";

@@ -4,7 +4,7 @@ import ChatBox from './components/ChatBox'
 const page = () => {
   return (
     <div>
-      <ChatBox />
+      {/*<ChatBox />*/}
     </div>
   )
 }

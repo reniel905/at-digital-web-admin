@@ -14,7 +14,7 @@ import {
   PanelLeftClose,
   PencilRuler,
 } from "lucide-react";
-import { useSidebar } from "../../context/sidebarContext"; // ✅ import the context
+import { useSidebar } from "../contexts/sidebarContext"; // ✅ import the context
 
 type SideBarProps = {
   isOpen?: boolean; // determines if TopBar is controlling it
@@ -30,11 +30,11 @@ const SideBar = ({ isOpen }: SideBarProps) => {
     route: string;
     icon?: JSX.Element;
   }[] = [
-    { title: "Blogs", route: "/admin/content-management/blogs" },
-    { title: "Reviews", route: "/admin/content-management/reviews" },
-    { title: "Packages", route: "/admin/content-management/packages" },
-    { title: "Services", route: "/admin/content-management/services" },
-    { title: "Portfolio", route: "/admin/content-management/portfolio" },
+    { title: "Blogs", route: "/content-management/blogs" },
+    { title: "Reviews", route: "/content-management/reviews" },
+    { title: "Packages", route: "/content-management/packages" },
+    { title: "Services", route: "/content-management/services" },
+    { title: "Portfolio", route: "/content-management/portfolio" },
   ];
 
   const tabs: {
@@ -45,30 +45,30 @@ const SideBar = ({ isOpen }: SideBarProps) => {
   }[] = [
     {
       title: "Dashboard",
-      route: "/admin/dashboard",
+      route: "/dashboard",
       icon: <LayoutDashboard strokeWidth={1} />,
     },
     {
       title: "Notifications",
-      route: "/admin/notifications",
+      route: "/notifications",
       icon: <Bell strokeWidth={1} />,
       badgeCount: 18,
     },
     {
       title: "Message",
-      route: "/admin/messages",
+      route: "/messages",
       icon: <MessageSquareText strokeWidth={1} />,
       badgeCount: 69,
     },
     {
       title: "Bookings",
-      route: "/admin/bookings",
+      route: "/bookings",
       icon: <CalendarDays strokeWidth={1} />,
       badgeCount: 300,
     },
     {
       title: "Quotations",
-      route: "/admin/quotations",
+      route: "/quotations",
       icon: <Calculator strokeWidth={1} />,
     },
   ];
@@ -167,7 +167,7 @@ const SideBar = ({ isOpen }: SideBarProps) => {
         />
         <Tab
           title="Settings"
-          route="/admin/settings"
+          route="/settings"
           icon={<Settings strokeWidth={1} />}
           onClick={() => {
             setSelectedTab("");
