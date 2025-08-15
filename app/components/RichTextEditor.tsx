@@ -12,7 +12,7 @@ const toolbar = [
   [{ color: [] }, { background: [] }],
   [{ list: "ordered" }, { list: "bullet" }],
   [{ align: [] }],
-  ["link", "image", "code-block", "blockquote"],
+  ["link", "blockquote"],
   ["clean"],
 ];
 
@@ -23,52 +23,15 @@ export default function RichTextEditor({
   value?: string;
   onChange?: (html: string) => void;
 }) {
-  const [local, setLocal] = useState<string>(value ?? "");
-  const [editor, setEditor] = useState<any>(null);
+  const [content, setContent] = useState<string>(value ?? "");
 
-  const handleImageUpload = async () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    input.onchange = async () => {
-      if (!input.files) return;
-      const file = input.files[0];
-
-      const formData = new FormData();
-      formData.append("image", file);
-
-      try {
-        const res = await fetch("http://localhost:8080/upload-image", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await res.json();
-
-        if (!editor) return;
-
-        const range = editor.getSelection(true);
-        editor.insertEmbed(range.index, "image", data.url);
-        editor.setSelection(range.index + 1);
-      } catch (err) {
-        console.error("Image upload failed:", err);
-      }
-    };
-  };
-
-  const modules = useMemo(
+   const modules = useMemo(
     () => ({
-      toolbar: {
-        container: toolbar,
-        handlers: {
-          image: handleImageUpload,
-        },
-      },
+      toolbar: toolbar,
       history: { delay: 1000, maxStack: 100, userOnly: true },
       clipboard: { matchVisual: false },
     }),
-    [editor]
+    []
   );
 
   const formats = useMemo(
@@ -83,7 +46,6 @@ export default function RichTextEditor({
       "list",
       "align",
       "link",
-      "image",
       "code-block",
       "blockquote",
     ],
@@ -93,16 +55,10 @@ export default function RichTextEditor({
   return (
     <div className="w-full">
       <ReactQuill
-        value={local}
+        value={content}
         onChange={(html) => {
-          setLocal(html);
+          setContent(html);
           onChange?.(html);
-        }}
-        onFocus={(range, source, editorInstance) => {
-          // store the editor instance when first focused
-          if (!editor) {
-            setEditor(editorInstance);
-          }
         }}
         modules={modules}
         formats={formats}
